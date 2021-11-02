@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
         --background: #f0f2f5;
         --shape: #ffffff;
     }
+
     *{
         margin: 0;
         padding: 0;
@@ -25,9 +26,19 @@ const GlobalStyle = createGlobalStyle`
             font-size: 87.5%;
         }
     }
+
     body {
         background: var(--background);
         -webkit-font-smooting: antialiased;
+    }
+
+    border-style, input, textarea,button {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+    }
+
+    h1, h2, h3, h4, strong {
+        font-font-weight: 600;
     }
 
     button {
