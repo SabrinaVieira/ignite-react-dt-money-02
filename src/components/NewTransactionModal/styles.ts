@@ -1,5 +1,5 @@
 import styled from  "styled-components";
-import { darken } from 'polished'
+import { darken, transparentize } from 'polished'
 
 export const TransactionModalContainer = styled.form`
     h2 {
@@ -48,7 +48,6 @@ export const TransactionModalContainer = styled.form`
     }
 `;
 
-
 export const TransactionTypeContainer = styled.div `
     margin: 1rem 0;
     display: grid;
@@ -59,8 +58,13 @@ export const TransactionTypeContainer = styled.div `
 
 interface IRadioButton {
     isActive: boolean;
+    activeColor: 'green' | 'red';
 }
 
+const colors = {
+    green: '#33cc95',
+    red: '#e52e4d',
+}
 
 export const RadioBoxButton = styled.button<IRadioButton>`
     height: 4rem;
@@ -68,7 +72,10 @@ export const RadioBoxButton = styled.button<IRadioButton>`
     border-radius: 0.25rem;
 
     // passar uma função dentro da interpolação
-    background: ${(props)=> props.isActive ? '#ccc': 'transparent'};
+    background: ${(props)=> props.isActive 
+    ? transparentize(0.8, colors[props.activeColor])
+    : 'transparent'
+    };
     display: flex;
     align-items: center;
     justify-content: center;
