@@ -1,5 +1,5 @@
 import styled from  "styled-components";
 
-export const TransactionModalContainer = styled.div`
-    
+export const TransactionModalContainer = styled.form`
+
 `;
