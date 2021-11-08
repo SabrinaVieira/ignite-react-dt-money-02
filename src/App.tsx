@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { Dashboard } from './components/Dashboard';
 import { Header } from './components/Header';
 import { NewTransactionModal } from './components/NewTransactionModal';
+import { TransactionsProviderContext } from './components/TransactionContext';
 import { GlobalStyle } from './styles/global';
 
 Modal.setAppElement('#root');
@@ -19,7 +20,7 @@ export function App() {
     }
 
   return (
-    <>
+    <TransactionsProviderContext>
       
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal}/>
       <Dashboard />      
@@ -27,11 +28,9 @@ export function App() {
       <NewTransactionModal 
       isOpen={isNewTransactionModalIsOpen} 
       onRequestClose={handleCloseNewTransactionModal} />
-
       <GlobalStyle />
-      {/* porque essa merda nao aplica a fonte? */}
 
-    </>
+    </TransactionsProviderContext>
   );
 }
 
