@@ -10,13 +10,24 @@ interface ITransaction{
     createAt: string;
 }
 
-interface ITransactionsProviderContext {
+// type TransactionInput = Omit<ITransaction, 'id'| 'createAt'>;
+
+type TransactionInput = Pick<ITransaction, 'title'| 'amount' | 'type' | 'category'>;
+
+interface ITransactionsProvider {
     children: ReactNode;
 }
 
-export const TransactionContext = createContext<ITransaction[]>([])
+interface ITransactionContextdata {
+    transactions: ITransaction[];
+    CreateNewTransaction: (transaction: TransactionInput) => void;
+}
 
-export function TransactionsProviderContext({children}: ITransactionsProviderContext){
+export const TransactionContext = createContext<ITransactionContextdata>(
+    {} as ITransactionContextdata
+)
+
+export function TransactionsProviderContext({children}: ITransactionsProvider){
     const [transactions, setTransactions] = useState<ITransaction[]>([]);
 
     useEffect(()=> {
@@ -24,8 +35,13 @@ export function TransactionsProviderContext({children}: ITransactionsProviderCon
         .then(response => setTransactions(response.data.transactions))
     }, []);
 
+    function CreateNewTransaction(transaction: TransactionInput){
+        
+        api.post('transactions', transaction)
+    }
+
     return(
-        <TransactionContext.Provider value={transactions}>
+        <TransactionContext.Provider value={{transactions, CreateNewTransaction}}>
             {children}
         </TransactionContext.Provider>
     )
