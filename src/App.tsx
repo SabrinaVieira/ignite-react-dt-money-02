@@ -9,6 +9,7 @@ import { GlobalStyle } from './styles/global';
 Modal.setAppElement('#root');
 
 export function App() {
+  
   const [isNewTransactionModalIsOpen, setIsNewTransactionModalIsOpen] = useState(false);
 
     function handleOpenNewTransactionModal(){
